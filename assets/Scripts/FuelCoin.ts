@@ -56,7 +56,6 @@ export class FuelCoin extends Component implements ICollidable {
         if (playerCar) {
             EventManager.dispatchEvent("AddFuel");    
             this.sprite.enabled = false;   
-            //this.node = false;
         }
     }
 

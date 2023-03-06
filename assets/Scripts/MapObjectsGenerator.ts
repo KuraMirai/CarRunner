@@ -19,7 +19,6 @@ export class MapObjectsGenerator extends Component {
     @property(Prefab)
     fuelCoin!: Prefab;
 
-    obstaclesCounter = 0;
     enemies: CarAI[] = [];
 
     lanesObjects: { [key: number]: any[] } = {
@@ -28,16 +27,15 @@ export class MapObjectsGenerator extends Component {
         [GameConstants.ROAD_LANE_TOP]: [],
     };
 
-
     start() {
         EventManager.on("StartGame", this.StartGame, this)
         EventManager.on("Replay", this.StartGame, this)
     }
 
     StartGame() {
-        this.obstaclesCounter = 0;
         this.ClearAllGenerated();
-        this.Generate();
+        this.unschedule(this.Generate);
+        this.StartGenerating();
     }
 
     ClearAllGenerated() {
@@ -56,76 +54,122 @@ export class MapObjectsGenerator extends Component {
         this.lanesObjects[GameConstants.ROAD_LANE_TOP] = [];
     }
 
-    StartGenerating()
-    {
-        this.schedule(this.Generate, 2, 10, 0);
+    StartGenerating() {
+        this.schedule(this.Generate, GameConstants.OBSTACLE_GENERATION_INTERVAL, GameConstants.OBSTACLE_GENERATION_COUNT, 0);
     }
 
-    Generate() {          
+    Generate() {
+        this.GenerateObstacles();
+        this.GenerateCoins();
+    }
 
-        for (let i = 0; i < 5; i++) {
-            let obs = instantiate(this.carAiPrefab);
-            obs.setParent(this.carAIParentNode);
-            let car = obs.getComponent('CarAI') as CarAI;
-            this.enemies.push(car);
-            let lane = Math.floor(math.randomRange(GameConstants.ROAD_LANE_BOT, GameConstants.ROAD_LANE_TOP + 1));
-            let offsetX = GameConstants.ROAD_MIN_LENGTH_OFFSET + this.enemies.indexOf(car) * GameConstants.ENEMY_CAR_SPAWN_SAFE_DISTANCE;
-            let offset = new Vec3(offsetX, -offsetX / 2);
-            car.Spawn(offset, lane);
-        }
-
-        for (let i = 0; i < 20; i++) {
-            let ostacle = instantiate(this.obstacle);
-            ostacle.setParent(this.obstaclesParentNode);
-            let obs = ostacle.getComponent('Obstacle') as Obstacle;
-            let lane = Math.floor(math.randomRange(GameConstants.ROAD_LANE_BOT, GameConstants.ROAD_LANE_TOP + 1));
-            this.lanesObjects[lane].push(obs);
-            this.obstaclesCounter++;
-            let offsetX = GameConstants.ROAD_MIN_LENGTH_OFFSET + (this.lanesObjects[lane].indexOf(obs) + this.obstaclesCounter) * GameConstants.OBSTACLE_SPAWN_SAFE_DISTANCE;
-            let offset = new Vec3(offsetX, -offsetX / 2);
-            obs.Spawn(offset, lane);
-        }
-
-        for (let i = 0; i < 20; i++) {
-            let coinObj = instantiate(this.fuelCoin);
-            coinObj.setParent(this.obstaclesParentNode);
-            let coin = coinObj.getComponent('FuelCoin') as FuelCoin;
-            let lane = Math.floor(math.randomRange(GameConstants.ROAD_LANE_BOT, GameConstants.ROAD_LANE_TOP + 1));
-            this.lanesObjects[lane].push(coin);
-            let offsetX = GameConstants.ROAD_MIN_LENGTH_OFFSET + this.lanesObjects[lane].indexOf(coin) * (GameConstants.COIN_SPAWN_SAFE_DISTANCE + GameConstants.OBSTACLE_SPAWN_SAFE_DISTANCE);
-            let offset = new Vec3(offsetX, -offsetX / 2);
-            coin.Spawn(offset, lane);
+    GenerateObstacles() {
+        let rand = Math.floor(math.randomRange(1, 2));
+        switch (rand) {
+            case 0:
+                this.GenerateOneObstacle(Math.floor(math.randomRange(GameConstants.ROAD_LANE_BOT, GameConstants.ROAD_LANE_TOP + 1)));
+                break;
+            case 1:
+                this.GenerateObstacleAndCoin();
+                break;
+            case 2:
+                this.GenerateTwoObstacleAndCoin();
+                break;
         }
     }
 
-    CreateOneObstacle()
-    {
-
+    GenerateCoins() {
+        let rand = Math.floor(math.randomRange(0, 1));
+        switch (rand) {
+            case 0:
+                this.GenerateCoin(Math.floor(math.randomRange(GameConstants.ROAD_LANE_BOT, GameConstants.ROAD_LANE_TOP + 1)), GameConstants.COIN_SPAWN_SAFE_DISTANCE);
+                break;
+            case 1:
+                this.GenerateTwoCoins();
+                break;
+            case 2:
+                this.GenerateCoinsStack();
+                break;
+        }
     }
 
-    CreateOneObstacleAndCoin()
-    {
+    GetShuffledArray(): number[] {
+        let values: number[] = [GameConstants.ROAD_LANE_BOT, GameConstants.ROAD_LANE_MID, GameConstants.ROAD_LANE_TOP];
+        for (let i = values.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [values[i], values[j]] = [values[j], values[i]];
+        }
 
+        return values.slice(0, 3);
     }
 
-    GenerateTwoObstacleAndCoin()
-    {
-
+    GenerateOneObstacle(lane: number) {
+        let rand = Math.floor(math.randomRange(0, 2));
+        switch (rand) {
+            case 0:
+                this.CreateCar(lane);
+                break;
+            case 1:
+                this.CreateObstacle(lane);
+                break;
+        }
     }
 
-    GenerateCoin()
-    {
-
+    GenerateObstacleAndCoin() {
+        let randArray = this.GetShuffledArray();
+        this.GenerateOneObstacle(randArray[0]);
+        this.GenerateCoin(randArray[1]);
     }
 
-    GenerateTwoCoins()
-    {
-
+    GenerateTwoObstacleAndCoin() {
+        let randArray = this.GetShuffledArray();
+        this.GenerateOneObstacle(randArray[0]);
+        this.GenerateOneObstacle(randArray[1]);
+        this.GenerateCoin(randArray[2]);
     }
 
-    GenerateCoinsStack()
-    {
+    CreateCar(lane: number) {
+        let obs = instantiate(this.carAiPrefab);
+        obs.setParent(this.carAIParentNode);
+        let car = obs.getComponent('CarAI') as CarAI;
+        this.enemies.push(car);
+        let offsetX = GameConstants.OBSTACLE_SPAWN_SAFE_DISTANCE;
+        let offset = new Vec3(offsetX, -offsetX / 2);
+        car.Spawn(offset, lane);
+    }
 
+    CreateObstacle(lane: number) {
+        let ostacle = instantiate(this.obstacle);
+        ostacle.setParent(this.obstaclesParentNode);
+        let obs = ostacle.getComponent('Obstacle') as Obstacle;
+        this.lanesObjects[lane].push(obs);
+        let offsetX = GameConstants.OBSTACLE_SPAWN_SAFE_DISTANCE;
+        let offset = new Vec3(offsetX, -offsetX / 2);
+        obs.Spawn(offset, lane);
+    }
+
+    GenerateCoin(lane: number, positionOffset: number = 0) {
+        let coinObj = instantiate(this.fuelCoin);
+        coinObj.setParent(this.obstaclesParentNode);
+        let coin = coinObj.getComponent('FuelCoin') as FuelCoin;
+        this.lanesObjects[lane].push(coin);
+        let offsetX = GameConstants.OBSTACLE_SPAWN_SAFE_DISTANCE + positionOffset;
+        let offset = new Vec3(offsetX, -offsetX / 2);
+        coin.Spawn(offset, lane);
+    }
+
+    GenerateTwoCoins() {
+        let randArray = this.GetShuffledArray();
+        this.GenerateCoin(randArray[0], GameConstants.COIN_SPAWN_SAFE_DISTANCE);
+        this.GenerateCoin(randArray[1], GameConstants.COIN_SPAWN_SAFE_DISTANCE);
+    }
+
+    GenerateCoinsStack() {
+        let rand = Math.floor(math.randomRange(2, 4));
+        let lane = Math.floor(math.randomRange(GameConstants.ROAD_LANE_BOT, GameConstants.ROAD_LANE_TOP + 1));
+        for (let i = 0; i < rand; i++) {
+            this.GenerateCoin(lane, GameConstants.COIN_SPAWN_SAFE_DISTANCE + GameConstants.COIN_OFFSET_SAFE_DISTANCE * i);
+        }
     }
 }
 
