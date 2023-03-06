@@ -1,0 +1,53 @@
+{
+  "game": {
+    "app_id": "678571334",
+    "name": "CarRunner_20230303152533",
+    "c_id": "0"
+  },
+  "appConfigMaps": [
+    {
+      "app_id": "UNKNOW",
+      "config_id": "68f23c"
+    },
+    {
+      "app_id": "678571324",
+      "config_id": "8fd736"
+    },
+    {
+      "app_id": "678571334",
+      "config_id": "71ef23"
+    }
+  ],
+  "configs": [
+    {
+      "app_id": "UNKNOW",
+      "config_id": "68f23c",
+      "config_name": "Default",
+      "config_remarks": "",
+      "services": []
+    },
+    {
+      "app_id": "678571324",
+      "config_id": "8fd736",
+      "config_name": "Default",
+      "config_remarks": "",
+      "services": []
+    },
+    {
+      "app_id": "678571334",
+      "config_id": "71ef23",
+      "config_name": "Default",
+      "config_remarks": "",
+      "services": [
+        {
+          "service_id": "235",
+          "enable": false,
+          "param": {
+            "app_id": "678571334",
+            "store_id": "H5"
+          }
+        }
+      ]
+    }
+  ]
+}
