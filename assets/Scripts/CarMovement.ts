@@ -1,20 +1,25 @@
 
-import { _decorator, Component, Node, Quat, Vec3, Vec2, EventMouse, physics } from 'cc';
+import { _decorator, Component, Node, Quat, Vec3, Vec2, EventMouse, physics, game } from 'cc';
+import { EventManager } from './EventManager';
 import { GameConstants } from './GameConstants';
-const { ccclass } = _decorator;
+const { ccclass, property } = _decorator;
 
 @ccclass('CarMovement')
 export class CarMovement extends Component {
+    @property
+    speed = 0;
+
     state = 0;
     lane = 0;
+    speedMultiplier = 1;
 
-    onEnable () {
+    onEnable() {
         // subscribe to the custom event on the observer node
         this.node.on('SwipedUp', this.MoveLeft, this);
         this.node.on('SwipedDown', this.MoveRight, this);
     }
 
-    onDisable () {
+    onDisable() {
         // unsubscribe from the custom event on the observer node to prevent memory leaks
         this.node.off('SwipedUp', this.MoveLeft, this);
         this.node.off('SwipedDown', this.MoveRight, this);
@@ -22,8 +27,16 @@ export class CarMovement extends Component {
 
 
     public Init(lane: number) {
+        this.node.setPosition(Vec3.ZERO);
         this.state = GameConstants.CAR_STATE_IDLE;
         this.lane = lane;
+        EventManager.dispatchEvent(GameConstants.SHOW_TUTORIAL)
+    }
+
+    public StartGamePreview() {
+        this.state = GameConstants.CAR_STATE_PREVIEW;
+        this.lane = GameConstants.ROAD_LANE_MID;
+        this.node.setPosition(GameConstants.CAR_START_PREVIEW_POSITION);
     }
 
     update(dt: number) {
@@ -34,6 +47,21 @@ export class CarMovement extends Component {
 
     UpdateMove(dt: number) {
         switch (this.state) {
+            case GameConstants.CAR_STATE_PREVIEW:
+                if (this.lane == GameConstants.ROAD_LANE_MID) {
+                    if (this.node.position.x >= 0 && this.node.position.y >= 0) {
+                        this.Init(GameConstants.ROAD_LANE_MID);
+                    }
+                    if (this.node.position.x <= 0 && this.node.position.y >= 0) {
+                         this.node.position = this.node.position.add(new Vec3(2 * this.speed * this.speedMultiplier, -this.speed * this.speedMultiplier, 0));  
+                    } 
+                }
+                break;
+            case GameConstants.CAR_STATE_END_PREVIEW:
+                    if (this.node.position.x >= GameConstants.CAR_END_PREVIEW_POSITION.x && this.node.position.y >= GameConstants.CAR_END_PREVIEW_POSITION.y) {
+                         this.node.position = this.node.position.subtract(new Vec3(2 * this.speed * this.speedMultiplier, -this.speed * this.speedMultiplier, 0));  
+                    } 
+                break;
             case GameConstants.CAR_STATE_IDLE:
                 break;
             case GameConstants.CAR_STATE_MOVE:
@@ -117,7 +145,7 @@ export class CarMovement extends Component {
             return;
         }
 
-         if (this.state == GameConstants.CAR_STATE_MOVE_LEFT) {
+        if (this.state == GameConstants.CAR_STATE_MOVE_LEFT) {
             Quat.fromEuler(newRotation, 0, 0, GameConstants.CAR_TURN_ANGLE);
             this.node.setRotation(newRotation);
         }

@@ -7,6 +7,8 @@ export class InputDector extends Component {
 
   @property(Node)
   carMovement!: Node;
+  @property(Node)
+  tutorialNode!: Node;
 
   MIN_SWIPE_DISTANCE = 5; // Minimum distance to be considered a swipe
   touchStartPos: Vec2 = new Vec2;
@@ -33,10 +35,12 @@ export class InputDector extends Component {
       const direction = this.touchEndPos.normalize();
       if (direction.y > 0) {
         this.carMovement.emit('SwipedUp');
+        this.tutorialNode.emit('SwipedUp');        
       }
 
       else {
         this.carMovement.emit('SwipedDown');
+        this.tutorialNode.emit('SwipedDown'); 
       }
     }
   }

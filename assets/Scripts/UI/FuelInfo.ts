@@ -1,6 +1,7 @@
 
 import { _decorator, Component, Node, Label } from 'cc';
 import { EventManager } from '../EventManager';
+import { GameConstants } from '../GameConstants';
 const { ccclass, property } = _decorator;
 
 @ccclass('FuelInfo')
@@ -15,7 +16,7 @@ export class FuelInfo extends Component {
         EventManager.on("RemoveFuel", this.RemoveFuel,this);
     }
 
-    public StartGame()
+    public StartGamePreview()
     {
         FuelInfo.fuelCounter = 0;
         this.infoLabel.string = FuelInfo.fuelCounter.toString();

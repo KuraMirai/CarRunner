@@ -1,32 +1,48 @@
 
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, Animation } from 'cc';
+import { EventManager } from '../EventManager';
+import { GameConstants } from '../GameConstants';
 const { ccclass, property } = _decorator;
 
 @ccclass('TutorialMenu')
 export class TutorialMenu extends Component {
-    // [1]
-    // dummy = '';
+    @property(Animation)
+    tutorialAnimation!: Animation;
 
-    // [2]
-    // @property
-    // serializableDummy = 0;
+    isCompleted = false;
 
-    start () {
-        // [3]
+    onEnable () {
+        // subscribe to the custom event on the observer node
+        this.node.on('SwipedUp', this.StartGame, this);
+        this.node.on('SwipedDown', this.StartGame, this);
     }
 
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
+    onDisable () {
+        // unsubscribe from the custom event on the observer node to prevent memory leaks
+        this.node.off('SwipedUp', this.StartGame, this);
+        this.node.off('SwipedDown', this.StartGame, this);
+    }
+
+    StartGame()
+    {
+        this.isCompleted = true;
+        EventManager.dispatchEvent(GameConstants.START_STARTUP_TEXT);
+        EventManager.dispatchEvent(GameConstants.START_GAME);
+        this.Hide();
+    }
+
+    public Show(): void {
+        if(this.isCompleted)
+        {
+            EventManager.dispatchEvent(GameConstants.START_STARTUP_TEXT);
+            EventManager.dispatchEvent(GameConstants.START_GAME);
+        }
+        this.node.active = true;
+        this.tutorialAnimation.play();
+    }
+
+    public Hide(): void {
+        this.node.active = false;
+    }
 }
 
-/**
- * [1] Class member could be defined like this.
- * [2] Use `property` decorator if your want the member to be serializable.
- * [3] Your initialization goes here.
- * [4] Your update function goes here.
- *
- * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
- * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
- * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
- */

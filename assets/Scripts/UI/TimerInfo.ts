@@ -12,17 +12,29 @@ export class TimerInfo extends Component {
     gameTimer: number = -1;
     timerStarted = false;
 
+    onEnable() {
+        EventManager.on(GameConstants.START_GAME_PREVIEW, this.StartGamePreview, this)
+        EventManager.on(GameConstants.START_GAME, this.StartGame, this)
+    }
+
+    onDisable() {
+        EventManager.off(GameConstants.START_GAME_PREVIEW, this.StartGamePreview, this)
+        EventManager.off(GameConstants.START_GAME, this.StartGame, this)
+    }
+
+    public StartGamePreview() {
+        if (this.timerStarted)
+            this.unschedule(this.TimerTick);
+        this.timerStarted = true;
+        this.gameTimer = 0;
+        this.infoLabel.string = "0";
+    }
+
     public StartGame() {
         this.StartTimer();
     }
 
     StartTimer() {
-        if (this.timerStarted)
-            this.unschedule(this.TimerTick);
-
-        this.timerStarted = true;
-        this.gameTimer = 0;
-        this.infoLabel.string = "0";
         this.schedule(this.TimerTick, 1, GameConstants.GAME_DURATION, 0);
     }
 

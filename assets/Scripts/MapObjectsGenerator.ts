@@ -28,13 +28,19 @@ export class MapObjectsGenerator extends Component {
     };
 
     start() {
+        EventManager.on(GameConstants.START_GAME_PREVIEW, this.StartGamePreview, this)
         EventManager.on("StartGame", this.StartGame, this)
-        EventManager.on("Replay", this.StartGame, this)
+        EventManager.on("Replay", this.StartGamePreview, this)
+    }
+
+    StartGamePreview()
+    { 
+        this.ClearAllGenerated();
+        this.unschedule(this.Generate);
     }
 
     StartGame() {
-        this.ClearAllGenerated();
-        this.unschedule(this.Generate);
+       
         this.StartGenerating();
     }
 

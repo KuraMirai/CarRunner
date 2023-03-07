@@ -15,7 +15,7 @@ export class SpeedUpBar extends Component {
         EventManager.on("AddFuel", this.onAddFuel, this)
     }
 
-    public StartGame() {
+    public StartGamePreview() {
         this.fuelProgressBar.progress = 0;
         this.unschedule(this.ProgressTick);
     }

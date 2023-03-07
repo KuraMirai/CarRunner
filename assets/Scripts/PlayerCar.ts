@@ -17,15 +17,19 @@ export class PlayerCar extends Component {
     isInvinciple = false;
 
     start() {
+        EventManager.on(GameConstants.START_GAME_PREVIEW, this.StartGamePreview, this)
         EventManager.on("StartGame", this.StartGame, this)
-        EventManager.on("Replay", this.StartGame, this)
+        EventManager.on("Replay", this.StartGamePreview, this)
         EventManager.on("SpeedUp", this.SpeedUp, this)
         EventManager.on("EndSpeedUp", this.EndSpeedUp, this)
     }
 
+    StartGamePreview()
+    { 
+        this.carMovement.StartGamePreview();
+    }
+
     StartGame() {
-        this.carMovement.Init(GameConstants.ROAD_LANE_MID);
-        this.node.setPosition(Vec3.ZERO);
         this.CancelInvinciple();
     }
 

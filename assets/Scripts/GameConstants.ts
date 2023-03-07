@@ -1,19 +1,23 @@
-import { Vec2 } from "cc";
+import { Vec2, Vec3 } from "cc";
 
 export class GameConstants 
 {
         static ROAD_MID_POSITION		        = new Vec2(0, 0);    
         static ROAD_TOP_POSITION			    = new Vec2(220, 110);
-        static ROAD_BOT_POSITION			    = new Vec2(-220, -110);      
+        static ROAD_BOT_POSITION			    = new Vec2(-220, -110);   
+        static CAR_START_PREVIEW_POSITION	    = new Vec3(-1170, 590);   
+        static CAR_END_PREVIEW_POSITION	        = new Vec3(1170, -590);   
 
 		static ROAD_LANE_TOP				    = 1;
 		static ROAD_LANE_MID				    = 0;
 		static ROAD_LANE_BOT				    = -1;
 
+        static CAR_STATE_PREVIEW				= -1;
         static CAR_STATE_IDLE				    = 0;
 		static CAR_STATE_MOVE				    = 1;
 		static CAR_STATE_MOVE_LEFT			    = 2;
 		static CAR_STATE_MOVE_RIGHT			    = 3;
+        static CAR_STATE_END_PREVIEW	        = 4;
 
         static CAR_TURN_SPEED				    = 20;
         static CAR_TURN_ANGLE				    = 5;
@@ -31,6 +35,11 @@ export class GameConstants
 
         static OBSTACLE_GENERATION_INTERVAL     = 2;
         static OBSTACLE_GENERATION_COUNT        = 15;
+
+        static START_GAME_PREVIEW               =  "StartGamePreview"
+        static START_GAME                       =  "StartGame"
+        static SHOW_TUTORIAL                    =  "ShowTutorial"
+        static START_STARTUP_TEXT               =  "StartStartupText"
 }
 
 

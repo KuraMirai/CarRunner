@@ -1,10 +1,12 @@
 
 import { _decorator, Component, Node } from 'cc';
 import { EventManager } from '../EventManager';
+import { GameConstants } from '../GameConstants';
 import { GameOverMenu } from './GameOverMenu';
 import { InGameMenu } from './InGameMenu';
 import { StartGameMenu } from './StartGameMenu';
 import { TimerInfo } from './TimerInfo';
+import { TutorialMenu } from './TutorialMenu';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameUI')
@@ -15,15 +17,22 @@ export class GameUI extends Component {
     inGameMenu!: InGameMenu;
     @property(GameOverMenu)
     gameOverMenu!: GameOverMenu;
+    @property(TutorialMenu)
+    tutorialMenu!: TutorialMenu;
 
     start () {            
-        //this.startGameMenu.Show();
-        EventManager.on("StartGame", this.StartGame, this)
+        EventManager.on(GameConstants.START_GAME_PREVIEW, this.StartGamePreview, this)
         EventManager.on("Replay", this.Replay, this)
         EventManager.on("GameOver", this.GameOver, this)
+        EventManager.on(GameConstants.SHOW_TUTORIAL, this.ShowTutorial, this)
     }
     
-    StartGame()
+    ShowTutorial()
+    {
+        this.tutorialMenu.Show();
+    }
+
+    StartGamePreview()
     {
         this.startGameMenu.Hide();
         this.inGameMenu.Show();  
