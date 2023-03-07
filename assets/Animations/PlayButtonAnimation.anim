@@ -1,0 +1,53 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "PlayButtonAnimation",
+  "_objFlags": 0,
+  "_native": "",
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 38,
+  "events": [],
+  "enableTrsBlending": false,
+  "_duration": 1.5,
+  "_keys": [
+    [
+      0,
+      0.75,
+      1.5
+    ]
+  ],
+  "_stepness": 0,
+  "_curves": [
+    {
+      "modifiers": [
+        "scale"
+      ],
+      "data": {
+        "keys": 0,
+        "values": [
+          {
+            "__type__": "cc.Vec3",
+            "x": 0.7,
+            "y": 0.7,
+            "z": 1
+          },
+          {
+            "__type__": "cc.Vec3",
+            "x": 0.9,
+            "y": 0.9,
+            "z": 1
+          },
+          {
+            "__type__": "cc.Vec3",
+            "x": 0.7,
+            "y": 0.7,
+            "z": 1
+          }
+        ],
+        "easingMethods": {}
+      }
+    }
+  ],
+  "_commonTargets": [],
+  "_hash": 1655173830
+}

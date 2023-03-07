@@ -28,7 +28,7 @@ export class TimerInfo extends Component {
 
     TimerTick() {
         this.gameTimer++;
-        if (this.gameTimer == 20) {
+        if (this.gameTimer == GameConstants.GAME_DURATION) {
             EventManager.dispatchEvent("GameOver");
         }
         this.infoLabel.string = this.gameTimer.toString();

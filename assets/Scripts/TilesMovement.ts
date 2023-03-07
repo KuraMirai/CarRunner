@@ -1,4 +1,6 @@
-import { CCFloat, Component, game, RigidBody2D, Sprite, UITransform, Vec2, Vec3, _decorator } from "cc";
+import { CCFloat, Component, game, RigidBody2D, Sprite, UIOpacity, UITransform, Vec2, Vec3, _decorator } from "cc";
+import { EventManager } from "./EventManager";
+import { GameConstants } from "./GameConstants";
 
 const { ccclass, property } = _decorator;
 
@@ -19,10 +21,12 @@ export class TilesMovement extends Component {
     private velocity_speedUp_Max_Y = 0;
     @property
     private speed = 0;
+    
+    speedMultiplier = 1;
 
     start() {
-
-        
+        EventManager.on("SpeedUp", this.SpeedUp, this)
+        EventManager.on("EndSpeedUp", this.EndSpeedUp, this)        
     }
     
     update(deltaTime: number) {
@@ -33,9 +37,18 @@ export class TilesMovement extends Component {
             }
             if ((-this.roadTiles[i].linearVelocity.x < this.velocity_Max_X) || (this.roadTiles[i].linearVelocity.y < this.velocity_Max_Y)) {
                 //this.roadTiles[i].applyForceToCenter(new Vec2(-2 * this.speed, this.speed), true);
-                 this.roadTiles[i].node.position = this.roadTiles[i].node.position.subtract(new Vec3(2 * this.speed, -this.speed, 0));
-                
+                 this.roadTiles[i].node.position = this.roadTiles[i].node.position.subtract(new Vec3(2 * this.speed * this.speedMultiplier, -this.speed * this.speedMultiplier, 0));  
             }   
         }    
+    }
+
+    public SpeedUp()
+    {
+        this.speedMultiplier = GameConstants.SPEED_UP_MULTIPLIER;
+    }
+
+    public EndSpeedUp()
+    {
+        this.speedMultiplier = 1;
     }
 }

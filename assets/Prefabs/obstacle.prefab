@@ -32,10 +32,13 @@
       },
       {
         "__id__": 10
+      },
+      {
+        "__id__": 12
       }
     ],
     "_prefab": {
-      "__id__": 12
+      "__id__": 14
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -84,8 +87,8 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.42,
-      "y": 0.37
+      "x": 0.39,
+      "y": 0.32
     },
     "_id": ""
   },
@@ -159,8 +162,8 @@
     "_restitution": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 19,
-      "y": 20
+      "x": 25,
+      "y": 28
     },
     "_points": [
       {
@@ -247,6 +250,9 @@
     "rb": {
       "__id__": 8
     },
+    "obstacleOpacity": {
+      "__id__": 12
+    },
     "velocity_Max_X": 16,
     "velocity_Max_Y": 4,
     "speed": 4,
@@ -255,6 +261,24 @@
   {
     "__type__": "cc.CompPrefabInfo",
     "fileId": "6015ZTADVPMqVUeoFdQG7Z"
+  },
+  {
+    "__type__": "cc.UIOpacity",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 13
+    },
+    "_opacity": 255,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "8eQNC2yMNACICkV8l7CpjH"
   },
   {
     "__type__": "cc.PrefabInfo",

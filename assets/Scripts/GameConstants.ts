@@ -19,14 +19,18 @@ export class GameConstants
         static CAR_TURN_ANGLE				    = 5;
 
         static OBSTACLE_SPAWN_SAFE_DISTANCE     = 1140;
-        // static COIN_SPAWN_SAFE_DISTANCE         = 400;
+        static COIN_SPAWN_SAFE_DISTANCE         = 400;
         static COIN_OFFSET_SAFE_DISTANCE        = 200;
 
-        static GAME_DURATION                    = 20;
+        static GAME_DURATION                    = 30;
         static PLAYER_INVINCIPLE_DURATION       = 2;
+        static PLAYER_INVINCIPLE_BLAZE_INTERVAL = 0.2;
+        static SPEED_UP_DURATION                = 8;
+
+        static SPEED_UP_MULTIPLIER              = 2;
 
         static OBSTACLE_GENERATION_INTERVAL     = 2;
-        static OBSTACLE_GENERATION_COUNT        = 10;
+        static OBSTACLE_GENERATION_COUNT        = 15;
 }
 
 

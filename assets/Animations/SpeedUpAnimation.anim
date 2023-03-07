@@ -1,0 +1,86 @@
+[
+  {
+    "__type__": "cc.AnimationClip",
+    "_name": "SpeedUpAnimation",
+    "_objFlags": 0,
+    "_native": "",
+    "sample": 60,
+    "speed": 1,
+    "wrapMode": 2,
+    "events": [],
+    "enableTrsBlending": false,
+    "_duration": 0.6833333333333333,
+    "_keys": [
+      [
+        0.016666666666666666,
+        0.1,
+        0.18333333333333332,
+        0.26666666666666666,
+        0.35,
+        0.43333333333333335,
+        0.5166666666666667,
+        0.6,
+        0.6666666666666666
+      ]
+    ],
+    "_stepness": 0,
+    "_curves": [
+      {
+        "modifiers": [
+          {
+            "__id__": 1
+          },
+          "spriteFrame"
+        ],
+        "data": {
+          "keys": 0,
+          "values": [
+            {
+              "__uuid__": "d7410866-bafc-42dd-9dc6-288b297a2bae@f9941",
+              "__expectedType__": "cc.SpriteFrame"
+            },
+            {
+              "__uuid__": "83f59b67-6d9f-442d-bbf8-eecd77d04472@f9941",
+              "__expectedType__": "cc.SpriteFrame"
+            },
+            {
+              "__uuid__": "dda8b465-c24b-4e17-9819-ed2563c62ba7@f9941",
+              "__expectedType__": "cc.SpriteFrame"
+            },
+            {
+              "__uuid__": "277a2e1d-17b8-4d16-9f23-68d8105aa94f@f9941",
+              "__expectedType__": "cc.SpriteFrame"
+            },
+            {
+              "__uuid__": "68c8c785-4a33-4c43-977f-6bd19313c089@f9941",
+              "__expectedType__": "cc.SpriteFrame"
+            },
+            {
+              "__uuid__": "88b5059f-ba39-4138-a614-7edf38380b5b@f9941",
+              "__expectedType__": "cc.SpriteFrame"
+            },
+            {
+              "__uuid__": "7c18885d-4587-4db4-8b69-9d198f9e181a@f9941",
+              "__expectedType__": "cc.SpriteFrame"
+            },
+            {
+              "__uuid__": "d9db86de-9774-4565-93bc-ba0faab41610@f9941",
+              "__expectedType__": "cc.SpriteFrame"
+            },
+            {
+              "__uuid__": "53e6ac72-f4b7-408e-aecb-43f17d06dc00@f9941",
+              "__expectedType__": "cc.SpriteFrame"
+            }
+          ],
+          "easingMethods": {}
+        }
+      }
+    ],
+    "_commonTargets": [],
+    "_hash": 4139329442
+  },
+  {
+    "__type__": "cc.animation.ComponentPath",
+    "component": "cc.Sprite"
+  }
+]

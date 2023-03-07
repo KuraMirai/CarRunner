@@ -1,5 +1,7 @@
 
 import { _decorator, Component, Node, RigidBody2D, Vec2, Vec3, Collider, ICollisionEvent, Collider2D, Contact2DType, IPhysics2DContact } from 'cc';
+import { EventManager } from './EventManager';
+import { GameConstants } from './GameConstants';
 const { ccclass, property } = _decorator;
 
 @ccclass('CarAIMovement')
@@ -14,10 +16,12 @@ export class CarAIMovement extends Component {
     private speed = 0;
 
     lane = 0;
+    speedMultiplier = 1;
 
-    Init(lane: number) {
-        this.lane = lane;
-    }      
+    start() {
+        EventManager.on("SpeedUp", this.SpeedUp, this)
+        EventManager.on("EndSpeedUp", this.EndSpeedUp, this)
+    }     
 
     update(dt: number) {
         this.UpdateMove(dt);
@@ -31,9 +35,19 @@ export class CarAIMovement extends Component {
         // if ((-this.rigidbody.linearVelocity.x < this.velocity_Max_X) || (this.rigidbody.linearVelocity.y < this.velocity_Max_Y)) {
             // this.rigidbody.applyForceToCenter(new Vec2(-2 * this.speed, this.speed), true);
             this.rigidbody.wakeUp();
-            this.node.position = this.node.position.subtract(new Vec3(2 * this.speed, -this.speed, 0));
+            this.node.position = this.node.position.subtract(new Vec3(2 * this.speed * this.speedMultiplier, -this.speed * this.speedMultiplier, 0));
 
         // }
     }   
+
+    public SpeedUp()
+    {
+        this.speedMultiplier = GameConstants.SPEED_UP_MULTIPLIER;
+    }
+
+    public EndSpeedUp()
+    {
+        this.speedMultiplier = 1;
+    }
 }
 
