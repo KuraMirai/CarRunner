@@ -15,6 +15,8 @@ export class InGameMenu extends Component implements IWindow {
     fuelInfo!: FuelInfo;
     @property(SpeedUpBar)
     speedUpBar!: SpeedUpBar;
+    @property(TimerInfo)
+    timerInfo!: TimerInfo;
     @property(Animation)
     rideText!: Animation;
 
@@ -31,6 +33,7 @@ export class InGameMenu extends Component implements IWindow {
         this.node.active = true;
         this.fuelInfo.StartGamePreview();
         this.speedUpBar.StartGamePreview();
+        this.timerInfo.StartGamePreview();
     }
 
     public Hide(): void {

@@ -26,8 +26,8 @@ export class FuelCoin extends Component implements ICollidable {
 
     start() {
         this.collider.on(Contact2DType.BEGIN_CONTACT, this.onBEGIN_CONTACT, this);
-        EventManager.on("SpeedUp", this.SpeedUp, this)
-        EventManager.on("EndSpeedUp", this.EndSpeedUp, this)
+        EventManager.on(GameConstants.SPEED_UP, this.SpeedUp, this)
+        EventManager.on(GameConstants.END_SPEED_UP, this.EndSpeedUp, this)
     }
 
     update(deltaTime: number) {

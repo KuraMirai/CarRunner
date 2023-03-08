@@ -269,6 +269,10 @@
       "__uuid__": "78bd5b95-147f-479a-b622-33a5361789e2",
       "__expectedType__": "cc.Prefab"
     },
+    "finishLine": {
+      "__uuid__": "edac0f61-3d82-411d-8e86-f0dbf38d5cda",
+      "__expectedType__": "cc.Prefab"
+    },
     "_id": "6aE65xuYtL3IgIUrB930l4"
   },
   {
@@ -338,7 +342,7 @@
         "__id__": 281
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 297
@@ -2533,6 +2537,9 @@
     },
     "speedUpBar": {
       "__id__": 81
+    },
+    "timerInfo": {
+      "__id__": 67
     },
     "rideText": {
       "__id__": 88

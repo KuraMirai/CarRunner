@@ -12,8 +12,8 @@ export class FuelInfo extends Component {
     static fuelCounter = 0;
 
     start () {
-        EventManager.on("AddFuel", this.AddFuel,this);
-        EventManager.on("RemoveFuel", this.RemoveFuel,this);
+        EventManager.on(GameConstants.ADD_FUEL, this.AddFuel,this);
+        EventManager.on(GameConstants.REMOVE_FUEL, this.RemoveFuel,this);
     }
 
     public StartGamePreview()

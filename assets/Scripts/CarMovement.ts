@@ -11,18 +11,18 @@ export class CarMovement extends Component {
 
     state = 0;
     lane = 0;
-    speedMultiplier = 1;
+    speedMultiplier = GameConstants.SPEED_UP_MULTIPLIER;
 
     onEnable() {
         // subscribe to the custom event on the observer node
-        this.node.on('SwipedUp', this.MoveLeft, this);
-        this.node.on('SwipedDown', this.MoveRight, this);
+        this.node.on(GameConstants.SWIPED_UP, this.MoveLeft, this);
+        this.node.on(GameConstants.SWIPED_DOWN, this.MoveRight, this);
     }
 
     onDisable() {
         // unsubscribe from the custom event on the observer node to prevent memory leaks
-        this.node.off('SwipedUp', this.MoveLeft, this);
-        this.node.off('SwipedDown', this.MoveRight, this);
+        this.node.off(GameConstants.SWIPED_UP, this.MoveLeft, this);
+        this.node.off(GameConstants.SWIPED_DOWN, this.MoveRight, this);
     }
 
 
@@ -37,6 +37,10 @@ export class CarMovement extends Component {
         this.state = GameConstants.CAR_STATE_PREVIEW;
         this.lane = GameConstants.ROAD_LANE_MID;
         this.node.setPosition(GameConstants.CAR_START_PREVIEW_POSITION);
+    }
+    
+    public EndGamePreview() {
+        this.state = GameConstants.CAR_STATE_END_PREVIEW;
     }
 
     update(dt: number) {
@@ -58,8 +62,13 @@ export class CarMovement extends Component {
                 }
                 break;
             case GameConstants.CAR_STATE_END_PREVIEW:
-                    if (this.node.position.x >= GameConstants.CAR_END_PREVIEW_POSITION.x && this.node.position.y >= GameConstants.CAR_END_PREVIEW_POSITION.y) {
-                         this.node.position = this.node.position.subtract(new Vec3(2 * this.speed * this.speedMultiplier, -this.speed * this.speedMultiplier, 0));  
+                    if (this.node.position.x <= GameConstants.CAR_END_PREVIEW_POSITION.x || this.node.position.y >= GameConstants.CAR_END_PREVIEW_POSITION.y) {
+                         this.node.position = this.node.position.add(new Vec3(2 * this.speed * this.speedMultiplier, -this.speed * this.speedMultiplier, 0)); 
+
+                         if (this.node.position.x >= GameConstants.CAR_END_PREVIEW_POSITION.x && this.node.position.y <= GameConstants.CAR_END_PREVIEW_POSITION.y) {
+                            this.node.position = this.node.position.add(new Vec3(2 * this.speed * this.speedMultiplier, -this.speed * this.speedMultiplier, 0));  
+                            EventManager.dispatchEvent(GameConstants.GAME_OVER);
+                       } 
                     } 
                 break;
             case GameConstants.CAR_STATE_IDLE:

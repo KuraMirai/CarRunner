@@ -34,12 +34,22 @@ export class GameConstants
         static SPEED_UP_MULTIPLIER              = 2;
 
         static OBSTACLE_GENERATION_INTERVAL     = 2;
-        static OBSTACLE_GENERATION_COUNT        = 15;
+        static OBSTACLE_GENERATION_COUNT        = 13;
 
         static START_GAME_PREVIEW               =  "StartGamePreview"
         static START_GAME                       =  "StartGame"
         static SHOW_TUTORIAL                    =  "ShowTutorial"
         static START_STARTUP_TEXT               =  "StartStartupText"
+        static END_GAME                         =  "EndGame"
+        static GAME_OVER                        =  "GameOver"
+        static REPLAY                           =  "Replay"
+        static ADD_FUEL                         =  "AddFuel"
+        static REMOVE_FUEL                      =  "RemoveFuel"
+        static SPEED_UP                         =  "SpeedUp"
+        static END_SPEED_UP                     =  "EndSpeedUp"
+        static SWIPED_UP                        =  "SwipedUp"
+        static SWIPED_DOWN                      =  "SwipedDown"
+        
 }
 
 

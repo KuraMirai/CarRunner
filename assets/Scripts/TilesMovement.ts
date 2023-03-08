@@ -25,8 +25,8 @@ export class TilesMovement extends Component {
     speedMultiplier = 1;
 
     start() {
-        EventManager.on("SpeedUp", this.SpeedUp, this)
-        EventManager.on("EndSpeedUp", this.EndSpeedUp, this)        
+        EventManager.on(GameConstants.SPEED_UP, this.SpeedUp, this)
+        EventManager.on(GameConstants.END_SPEED_UP, this.EndSpeedUp, this)        
     }
     
     update(deltaTime: number) {

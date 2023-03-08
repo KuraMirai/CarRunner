@@ -1,6 +1,7 @@
 
 import { _decorator, Component, Node, Label } from 'cc';
 import { EventManager } from '../EventManager';
+import { GameConstants } from '../GameConstants';
 import { FuelInfo } from './FuelInfo';
 import { IWindow } from './IWindow';
 const { ccclass, property } = _decorator;
@@ -25,6 +26,6 @@ export class GameOverMenu extends Component implements IWindow{
 
     public Replay()
     {
-        EventManager.dispatchEvent("Replay");
+        EventManager.dispatchEvent(GameConstants.REPLAY);
     }
 }

@@ -13,14 +13,14 @@ export class TutorialMenu extends Component {
 
     onEnable () {
         // subscribe to the custom event on the observer node
-        this.node.on('SwipedUp', this.StartGame, this);
-        this.node.on('SwipedDown', this.StartGame, this);
+        this.node.on(GameConstants.SWIPED_UP, this.StartGame, this);
+        this.node.on(GameConstants.SWIPED_DOWN, this.StartGame, this);
     }
 
     onDisable () {
         // unsubscribe from the custom event on the observer node to prevent memory leaks
-        this.node.off('SwipedUp', this.StartGame, this);
-        this.node.off('SwipedDown', this.StartGame, this);
+        this.node.off(GameConstants.SWIPED_UP, this.StartGame, this);
+        this.node.off(GameConstants.SWIPED_DOWN, this.StartGame, this);
     }
 
     StartGame()
@@ -36,6 +36,7 @@ export class TutorialMenu extends Component {
         {
             EventManager.dispatchEvent(GameConstants.START_STARTUP_TEXT);
             EventManager.dispatchEvent(GameConstants.START_GAME);
+            return;
         }
         this.node.active = true;
         this.tutorialAnimation.play();

@@ -22,8 +22,8 @@ export class GameUI extends Component {
 
     start () {            
         EventManager.on(GameConstants.START_GAME_PREVIEW, this.StartGamePreview, this)
-        EventManager.on("Replay", this.Replay, this)
-        EventManager.on("GameOver", this.GameOver, this)
+        EventManager.on(GameConstants.REPLAY, this.Replay, this)
+        EventManager.on(GameConstants.GAME_OVER, this.GameOver, this)
         EventManager.on(GameConstants.SHOW_TUTORIAL, this.ShowTutorial, this)
     }
     

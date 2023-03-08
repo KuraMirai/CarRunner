@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Vec2, Canvas } from 'cc';
 import { EventManager } from './EventManager';
+import { GameConstants } from './GameConstants';
 const { ccclass, property } = _decorator;
 
 @ccclass('InputDector')
@@ -34,13 +35,13 @@ export class InputDector extends Component {
     if (distance >= this.MIN_SWIPE_DISTANCE) {
       const direction = this.touchEndPos.normalize();
       if (direction.y > 0) {
-        this.carMovement.emit('SwipedUp');
-        this.tutorialNode.emit('SwipedUp');        
+        this.carMovement.emit(GameConstants.SWIPED_UP);
+        this.tutorialNode.emit(GameConstants.SWIPED_UP);        
       }
 
       else {
-        this.carMovement.emit('SwipedDown');
-        this.tutorialNode.emit('SwipedDown'); 
+        this.carMovement.emit(GameConstants.SWIPED_DOWN);
+        this.tutorialNode.emit(GameConstants.SWIPED_DOWN); 
       }
     }
   }

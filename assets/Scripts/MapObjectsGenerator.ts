@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, Prefab, instantiate, math, Vec2, Vec3 } from 'cc';
 import { CarAI } from './CarAI';
 import { EventManager } from './EventManager';
+import { FinishLine } from './FinishLine';
 import { FuelCoin } from './FuelCoin';
 import { GameConstants } from './GameConstants';
 import { Obstacle } from './Obstacle';
@@ -18,6 +19,8 @@ export class MapObjectsGenerator extends Component {
     obstacle!: Prefab;
     @property(Prefab)
     fuelCoin!: Prefab;
+    @property(Prefab)
+    finishLine!: Prefab;
 
     enemies: CarAI[] = [];
 
@@ -29,8 +32,9 @@ export class MapObjectsGenerator extends Component {
 
     start() {
         EventManager.on(GameConstants.START_GAME_PREVIEW, this.StartGamePreview, this)
-        EventManager.on("StartGame", this.StartGame, this)
-        EventManager.on("Replay", this.StartGamePreview, this)
+        EventManager.on(GameConstants.START_GAME, this.StartGame, this)
+        EventManager.on(GameConstants.REPLAY, this.StartGamePreview, this)
+        EventManager.on(GameConstants.END_GAME, this.EndGamePreview, this)
     }
 
     StartGamePreview()
@@ -42,6 +46,11 @@ export class MapObjectsGenerator extends Component {
     StartGame() {
        
         this.StartGenerating();
+    }
+
+    EndGamePreview()
+    {
+        this.GenerateFinishLine();
     }
 
     ClearAllGenerated() {
@@ -97,6 +106,17 @@ export class MapObjectsGenerator extends Component {
                 this.GenerateCoinsStack();
                 break;
         }
+    }
+
+    GenerateFinishLine()
+    {
+        let ostacle = instantiate(this.finishLine);
+        ostacle.setParent(this.obstaclesParentNode);
+        let obs = ostacle.getComponent('FinishLine') as FinishLine;
+        this.lanesObjects[GameConstants.ROAD_LANE_MID].push(obs);
+        let offsetX = GameConstants.OBSTACLE_SPAWN_SAFE_DISTANCE;
+        let offset = new Vec3(offsetX, -offsetX / 2);
+        ostacle.setPosition(offset);
     }
 
     GetShuffledArray(): number[] {

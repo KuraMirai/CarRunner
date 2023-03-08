@@ -13,19 +13,16 @@ export class TimerInfo extends Component {
     timerStarted = false;
 
     onEnable() {
-        EventManager.on(GameConstants.START_GAME_PREVIEW, this.StartGamePreview, this)
         EventManager.on(GameConstants.START_GAME, this.StartGame, this)
     }
 
     onDisable() {
-        EventManager.off(GameConstants.START_GAME_PREVIEW, this.StartGamePreview, this)
         EventManager.off(GameConstants.START_GAME, this.StartGame, this)
     }
 
     public StartGamePreview() {
         if (this.timerStarted)
             this.unschedule(this.TimerTick);
-        this.timerStarted = true;
         this.gameTimer = 0;
         this.infoLabel.string = "0";
     }
@@ -35,13 +32,15 @@ export class TimerInfo extends Component {
     }
 
     StartTimer() {
+        this.timerStarted = true;
         this.schedule(this.TimerTick, 1, GameConstants.GAME_DURATION, 0);
     }
 
     TimerTick() {
         this.gameTimer++;
         if (this.gameTimer == GameConstants.GAME_DURATION) {
-            EventManager.dispatchEvent("GameOver");
+            EventManager.dispatchEvent(GameConstants.END_GAME);
+            this.timerStarted = false;
         }
         this.infoLabel.string = this.gameTimer.toString();
     }

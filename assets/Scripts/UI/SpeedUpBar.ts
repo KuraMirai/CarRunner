@@ -12,7 +12,7 @@ export class SpeedUpBar extends Component {
     static isSpeedUp = false;
 
     start() {
-        EventManager.on("AddFuel", this.onAddFuel, this)
+        EventManager.on(GameConstants.ADD_FUEL, this.onAddFuel, this)
     }
 
     public StartGamePreview() {
@@ -31,7 +31,7 @@ export class SpeedUpBar extends Component {
 
     SpeedUp() {
         SpeedUpBar.isSpeedUp = true;
-        EventManager.dispatchEvent("SpeedUp");
+        EventManager.dispatchEvent(GameConstants.SPEED_UP);
         this.schedule(this.ProgressTick, 0.5, GameConstants.SPEED_UP_DURATION * 2, 0);
     }
 
@@ -39,7 +39,7 @@ export class SpeedUpBar extends Component {
         this.fuelProgressBar.progress -= 0.0625;
         if (this.fuelProgressBar.progress  <= 0) {
             SpeedUpBar.isSpeedUp = false;
-            EventManager.dispatchEvent("EndSpeedUp");
+            EventManager.dispatchEvent(GameConstants.END_SPEED_UP);
         }
     }
 }

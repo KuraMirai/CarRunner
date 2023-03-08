@@ -11,8 +11,8 @@ export class GameStatesControll extends Component {
     start() {
 
         EventManager.on(GameConstants.START_GAME_PREVIEW, this.StartGame, this)
-        EventManager.on("Replay", this.StartGame, this)
-        EventManager.on("GameOver", this.GameOver, this)
+        EventManager.on(GameConstants.REPLAY, this.StartGame, this)
+        EventManager.on(GameConstants.GAME_OVER, this.GameOver, this)
     }
 
     private StartGame() {

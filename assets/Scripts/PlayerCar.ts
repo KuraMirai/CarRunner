@@ -16,21 +16,30 @@ export class PlayerCar extends Component {
 
     isInvinciple = false;
 
-    start() {
-        EventManager.on(GameConstants.START_GAME_PREVIEW, this.StartGamePreview, this)
-        EventManager.on("StartGame", this.StartGame, this)
-        EventManager.on("Replay", this.StartGamePreview, this)
-        EventManager.on("SpeedUp", this.SpeedUp, this)
-        EventManager.on("EndSpeedUp", this.EndSpeedUp, this)
+    start() {       
+        EventManager.on(GameConstants.START_GAME, this.StartGame, this)
+        EventManager.on(GameConstants.SPEED_UP, this.SpeedUp, this)
+        EventManager.on(GameConstants.END_SPEED_UP, this.EndSpeedUp, this)
+        EventManager.on(GameConstants.END_GAME, this.EndGamePreview, this)
     }
 
+    onEnable()
+    {
+        this.StartGamePreview();
+    }
+    
     StartGamePreview()
-    { 
+    {
         this.carMovement.StartGamePreview();
     }
 
     StartGame() {
         this.CancelInvinciple();
+    }
+
+    EndGamePreview()
+    {
+        this.carMovement.EndGamePreview();
     }
 
     public Hit() {
@@ -39,7 +48,7 @@ export class PlayerCar extends Component {
 
         this.MakeInvinciple();
         this.playerVfx.PlayHitAnimation();
-        EventManager.dispatchEvent("RemoveFuel");
+        EventManager.dispatchEvent(GameConstants.REMOVE_FUEL);
     }
 
     public SpeedUp()
@@ -56,7 +65,7 @@ export class PlayerCar extends Component {
 
     public AddFuel() {
         this.playerVfx.PlayFuelAnimation();
-        EventManager.dispatchEvent("AddFuel");
+        EventManager.dispatchEvent(GameConstants.ADD_FUEL);
     }
 
     MakeInvinciple() {
