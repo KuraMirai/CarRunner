@@ -34,7 +34,6 @@ export class GameConstants
         static SPEED_UP_MULTIPLIER              = 2;
 
         static OBSTACLE_GENERATION_INTERVAL     = 2;
-        static OBSTACLE_GENERATION_COUNT        = 13;
 
         static START_GAME_PREVIEW               =  "StartGamePreview"
         static START_GAME                       =  "StartGame"

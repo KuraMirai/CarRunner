@@ -12,12 +12,20 @@ export class SpeedUpBar extends Component {
     static isSpeedUp = false;
 
     start() {
+        EventManager.on(GameConstants.END_GAME, this.EndGame, this)
         EventManager.on(GameConstants.ADD_FUEL, this.onAddFuel, this)
     }
 
     public StartGamePreview() {
         this.fuelProgressBar.progress = 0;
         this.unschedule(this.ProgressTick);
+    }
+   
+    EndGame()
+    {
+        SpeedUpBar.isSpeedUp = false;
+        this.unschedule(this.ProgressTick);
+        this.fuelProgressBar.progress = 0;
     }
 
     onAddFuel() {

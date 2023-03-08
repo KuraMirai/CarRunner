@@ -39,6 +39,7 @@ export class TimerInfo extends Component {
     TimerTick() {
         this.gameTimer++;
         if (this.gameTimer == GameConstants.GAME_DURATION) {
+            EventManager.dispatchEvent(GameConstants.END_SPEED_UP);
             EventManager.dispatchEvent(GameConstants.END_GAME);
             this.timerStarted = false;
         }

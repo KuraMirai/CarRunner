@@ -19,14 +19,22 @@ export class InGameMenu extends Component implements IWindow {
     timerInfo!: TimerInfo;
     @property(Animation)
     rideText!: Animation;
+    @property(Animation)
+    timeEndedText!: Animation;
 
     
     onEnable() {
-        EventManager.on(GameConstants.START_STARTUP_TEXT, this.ShowText, this);
+        EventManager.on(GameConstants.START_STARTUP_TEXT, this.ShowRideText, this);
+        EventManager.on(GameConstants.END_GAME, this.ShowTimeEndedText, this);
+        this.rideText.on(Animation.EventType.STOP, this.HideRideText, this);
+        this.timeEndedText.on(Animation.EventType.STOP, this.HideTimeEndedText, this);
     }
 
     onDisable() {
-        EventManager.off(GameConstants.START_STARTUP_TEXT, this.ShowText, this);
+        EventManager.off(GameConstants.START_STARTUP_TEXT,  this.ShowRideText, this);
+        EventManager.off(GameConstants.END_GAME, this.ShowTimeEndedText, this);
+        this.rideText.off(Animation.EventType.STOP, this.HideRideText, this);
+        this.timeEndedText.off(Animation.EventType.STOP, this.HideTimeEndedText, this);
     }
 
     public Show(): void {
@@ -40,9 +48,26 @@ export class InGameMenu extends Component implements IWindow {
         this.node.active = false;
     }
 
-    ShowText()
+    ShowRideText()
     {
         this.rideText.node.active = true;
+        this.rideText.play();
+    }
+
+    HideRideText()
+    {
+        this.rideText.node.active = false;
+    }
+
+    ShowTimeEndedText()
+    {
+        this.timeEndedText.node.active = true;
+        this.timeEndedText.play();
+    }
+
+    HideTimeEndedText()
+    {
+        this.timeEndedText.node.active = false;
     }
 }
 

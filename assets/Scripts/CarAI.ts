@@ -52,11 +52,13 @@ export class CarAI extends Component implements ICollidable {
     }
 
     public SpeedUp() {
-        this.carOpacity.opacity = 128;
+        if (this.carOpacity != null)
+            this.carOpacity.opacity = 128;
     }
 
     public EndSpeedUp() {
-        this.carOpacity.opacity = 255;
+        if (this.carOpacity != null)
+            this.carOpacity.opacity = 255;
     }
 
 }

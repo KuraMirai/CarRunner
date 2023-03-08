@@ -15,12 +15,13 @@ export class PlayerCar extends Component {
     playerVfx!: PlayerVfx;
 
     isInvinciple = false;
+    isSpeedUpInvinciple = false;
 
     start() {       
         EventManager.on(GameConstants.START_GAME, this.StartGame, this)
         EventManager.on(GameConstants.SPEED_UP, this.SpeedUp, this)
         EventManager.on(GameConstants.END_SPEED_UP, this.EndSpeedUp, this)
-        EventManager.on(GameConstants.END_GAME, this.EndGamePreview, this)
+        EventManager.on(GameConstants.END_GAME, this.EndGame, this)
     }
 
     onEnable()
@@ -37,13 +38,15 @@ export class PlayerCar extends Component {
         this.CancelInvinciple();
     }
 
-    EndGamePreview()
+    EndGame()
     {
         this.carMovement.EndGamePreview();
+        this.CancelInvinciple();
+        this.isInvinciple = true;
     }
 
     public Hit() {
-        if (this.isInvinciple)
+        if (this.isInvinciple || this.isSpeedUpInvinciple)
         return;
 
         this.MakeInvinciple();
@@ -53,13 +56,13 @@ export class PlayerCar extends Component {
 
     public SpeedUp()
     {
-        this.isInvinciple = true;
+        this.isSpeedUpInvinciple = true;
         this.playerVfx.PlaySpeedUpAnimation();
     }
 
     public EndSpeedUp()
     {
-        this.isInvinciple = false;
+        this.isSpeedUpInvinciple = false;
         this.playerVfx.StopSpeedUpAnimation();
     }
 

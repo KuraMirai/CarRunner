@@ -1,5 +1,6 @@
 
 import { _decorator, Component, Node, UIOpacity, Animation, Sprite, AnimationManager } from 'cc';
+import { EventManager } from './EventManager';
 import { GameConstants } from './GameConstants';
 const { ccclass, property } = _decorator;
 
@@ -51,7 +52,8 @@ export class PlayerVfx extends Component {
     }
 
     CancelInvinciple() {
-        //this.unschedule(this.ToggleBlink);
+        this.unschedule(this.ToggleBlink);
+        this.carSprite.enabled =  true;
     }  
     
     ToggleBlink() {

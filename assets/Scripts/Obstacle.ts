@@ -31,22 +31,22 @@ export class Obstacle extends Component implements ICollidable {
 
     update(deltaTime: number) {
         // if ((-this.rb.linearVelocity.x < this.velocity_Max_X) || (this.rb.linearVelocity.y < this.velocity_Max_Y)) {
-            //this.rb.applyForceToCenter(new Vec2(-2 * this.speed, this.speed), true);
-            // }
-            this.rb.wakeUp();
-            this.node.position = this.node.position.subtract(new Vec3(2 * this.speed * this.speedMultiplier, -this.speed * this.speedMultiplier, 0));
+        //this.rb.applyForceToCenter(new Vec2(-2 * this.speed, this.speed), true);
+        // }
+        this.rb.wakeUp();
+        this.node.position = this.node.position.subtract(new Vec3(2 * this.speed * this.speedMultiplier, -this.speed * this.speedMultiplier, 0));
     }
 
-    public SpeedUp()
-    {
+    public SpeedUp() {
         this.speedMultiplier = GameConstants.SPEED_UP_MULTIPLIER;
-        this.obstacleOpacity.opacity = 128;
+        if (this.obstacleOpacity != null)
+            this.obstacleOpacity.opacity = 128;
     }
 
-    public EndSpeedUp()
-    {
+    public EndSpeedUp() {
         this.speedMultiplier = 1;
-        this.obstacleOpacity.opacity = 255;
+        if (this.obstacleOpacity != null)
+            this.obstacleOpacity.opacity = 255;
     }
 
     public Spawn(offset: Vec3, lane: number) {
