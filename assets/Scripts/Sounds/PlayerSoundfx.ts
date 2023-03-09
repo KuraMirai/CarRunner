@@ -3,6 +3,7 @@ import { _decorator, Component, Node, AudioSource } from 'cc';
 const { ccclass, property } = _decorator;
 
 export enum PlayerSound {
+    EngineLoop,
     Move,
     HitCar,
     HitObject,
@@ -12,6 +13,8 @@ export enum PlayerSound {
 
 @ccclass('PlayerSoundfx')
 export class PlayerSoundfx extends Component {
+    @property(AudioSource)
+    engineLoopAudioSource!: AudioSource;
     @property(AudioSource)
     moveAudioSource!: AudioSource;
     @property(AudioSource)
@@ -25,6 +28,9 @@ export class PlayerSoundfx extends Component {
 
     PlaySound(sound: PlayerSound) {
         switch (sound) {
+            case PlayerSound.EngineLoop:
+                this.engineLoopAudioSource.play();
+                break;
             case PlayerSound.Move:
                 this.moveAudioSource.play();
                 break;
@@ -43,4 +49,8 @@ export class PlayerSoundfx extends Component {
         }
     }
 
+    StopPlayingEngine()
+    {
+        this.engineLoopAudioSource.stop();
+    }
 }

@@ -34,8 +34,8 @@ export class MainSoundsManager extends Component {
 
     PlayEndGameMusic()
     {
-        this.mainAudioSource.loop = false;
         this.PlaySound(this.endGameMusic);
+        this.mainAudioSource.loop = false;
     }
 }
 

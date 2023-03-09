@@ -31,6 +31,7 @@ export class PlayerCar extends Component {
         EventManager.on(GameConstants.SPEED_UP, this.SpeedUp, this)
         EventManager.on(GameConstants.END_SPEED_UP, this.EndSpeedUp, this)
         EventManager.on(GameConstants.END_GAME, this.EndGame, this)
+        EventManager.on(GameConstants.GAME_OVER, this.GameOver, this)
     }
 
     onEnable() {
@@ -38,6 +39,7 @@ export class PlayerCar extends Component {
     }
 
     StartGamePreview() {
+        this.playerSfx.PlaySound(PlayerSound.EngineLoop);
         this.carMovement.StartGamePreview();
     }
 
@@ -49,6 +51,11 @@ export class PlayerCar extends Component {
         this.carMovement.EndGamePreview();
         this.CancelInvinciple();
         this.isInvinciple = true;
+    }
+
+    GameOver()
+    {
+        this.playerSfx.StopPlayingEngine();
     }
 
     public Hit(hitType:PlayerHitType) {
