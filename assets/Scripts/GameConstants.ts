@@ -30,6 +30,7 @@ export class GameConstants
         static PLAYER_INVINCIPLE_DURATION       = 2;
         static PLAYER_INVINCIPLE_BLAZE_INTERVAL = 0.2;
         static SPEED_UP_DURATION                = 8;
+        static LOADING_DURATION                 = 2;
 
         static SPEED_UP_MULTIPLIER              = 2;
 
@@ -37,6 +38,7 @@ export class GameConstants
 
         static START_GAME_PREVIEW               =  "StartGamePreview"
         static START_GAME                       =  "StartGame"
+        static SHOW_LAODING_SCREEN              =  "ShowLoadingScreen"
         static SHOW_TUTORIAL                    =  "ShowTutorial"
         static START_STARTUP_TEXT               =  "StartStartupText"
         static END_GAME                         =  "EndGame"

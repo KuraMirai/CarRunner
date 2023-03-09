@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Label } from 'cc';
+import { _decorator, Component, Node, Label, clamp } from 'cc';
 import { EventManager } from '../EventManager';
 import { GameConstants } from '../GameConstants';
 const { ccclass, property } = _decorator;
@@ -33,7 +33,7 @@ export class TimerInfo extends Component {
 
     StartTimer() {
         this.timerStarted = true;
-        this.schedule(this.TimerTick, 1, GameConstants.GAME_DURATION, 0);
+        this.schedule(this.TimerTick, 1, GameConstants.GAME_DURATION - 1, 0);
     }
 
     TimerTick() {

@@ -4,6 +4,7 @@ import { EventManager } from '../EventManager';
 import { GameConstants } from '../GameConstants';
 import { GameOverMenu } from './GameOverMenu';
 import { InGameMenu } from './InGameMenu';
+import { LoadingScreenMenu } from './LoadingScreenMenu';
 import { StartGameMenu } from './StartGameMenu';
 import { TimerInfo } from './TimerInfo';
 import { TutorialMenu } from './TutorialMenu';
@@ -17,6 +18,8 @@ export class GameUI extends Component {
     inGameMenu!: InGameMenu;
     @property(GameOverMenu)
     gameOverMenu!: GameOverMenu;
+    @property(LoadingScreenMenu)
+    loadingScreenMenu!: LoadingScreenMenu;
     @property(TutorialMenu)
     tutorialMenu!: TutorialMenu;
 
@@ -24,12 +27,18 @@ export class GameUI extends Component {
         EventManager.on(GameConstants.START_GAME_PREVIEW, this.StartGamePreview, this)
         EventManager.on(GameConstants.REPLAY, this.Replay, this)
         EventManager.on(GameConstants.GAME_OVER, this.GameOver, this)
+        EventManager.on(GameConstants.SHOW_LAODING_SCREEN, this.ShowLoadingScreen, this)
         EventManager.on(GameConstants.SHOW_TUTORIAL, this.ShowTutorial, this)
     }
     
     ShowTutorial()
     {
         this.tutorialMenu.Show();
+    }
+
+    ShowLoadingScreen()
+    {
+        this.loadingScreenMenu.Show();
     }
 
     StartGamePreview()

@@ -24,6 +24,7 @@ export class MainSoundsManager extends Component {
         this.mainAudioSource.stop();
         this.mainAudioSource.clip = clip;
         this.mainAudioSource.play();
+        this.mainAudioSource.loop = true;
     }
     
     PlayBgMusic()
@@ -33,6 +34,7 @@ export class MainSoundsManager extends Component {
 
     PlayEndGameMusic()
     {
+        this.mainAudioSource.loop = false;
         this.PlaySound(this.endGameMusic);
     }
 }

@@ -15,9 +15,9 @@ export class StartGameMenu extends Component implements IWindow {
         this.node.active = false;
     }
     
-    public StartGamePreview()
+    public ShowLoadingScreen()
     {
-        EventManager.dispatchEvent(GameConstants.START_GAME_PREVIEW);
+        EventManager.dispatchEvent(GameConstants.SHOW_LAODING_SCREEN);
     }
 }
 
