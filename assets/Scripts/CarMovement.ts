@@ -2,10 +2,14 @@
 import { _decorator, Component, Node, Quat, Vec3, Vec2, EventMouse, physics, game } from 'cc';
 import { EventManager } from './EventManager';
 import { GameConstants } from './GameConstants';
+import { PlayerVfx } from './PlayerVfx';
+import { PlayerSound, PlayerSoundfx } from './Sounds/PlayerSoundfx';
 const { ccclass, property } = _decorator;
 
 @ccclass('CarMovement')
 export class CarMovement extends Component {
+    @property(PlayerSoundfx)
+    playerSfx!: PlayerSoundfx;
     @property
     speed = 0;
 
@@ -168,6 +172,7 @@ export class CarMovement extends Component {
     MoveLeft() {
         if (this.lane == GameConstants.ROAD_LANE_TOP || this.state != GameConstants.CAR_STATE_IDLE) return;
 
+        this.playerSfx.PlaySound(PlayerSound.Move);
         this.state = GameConstants.CAR_STATE_MOVE_LEFT;
         if (this.lane == GameConstants.ROAD_LANE_MID) {
             this.lane = GameConstants.ROAD_LANE_TOP;
@@ -179,7 +184,8 @@ export class CarMovement extends Component {
 
     MoveRight() {
         if (this.lane == GameConstants.ROAD_LANE_BOT || this.state != GameConstants.CAR_STATE_IDLE) return;
-
+        
+        this.playerSfx.PlaySound(PlayerSound.Move);
         this.state = GameConstants.CAR_STATE_MOVE_RIGHT;
         if (this.lane == GameConstants.ROAD_LANE_MID) {
             this.lane = GameConstants.ROAD_LANE_BOT;

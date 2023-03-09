@@ -2,7 +2,7 @@ import { _decorator, Component, Node, Collider2D, IPhysics2DContact, Contact2DTy
 import { EventManager } from './EventManager';
 import { GameConstants } from './GameConstants';
 import { ICollidable } from './ICollidable';
-import { PlayerCar } from './PlayerCar';
+import { PlayerCar, PlayerHitType } from './PlayerCar';
 import { SpeedUpBar } from './UI/SpeedUpBar';
 const { ccclass, property } = _decorator;
 
@@ -72,7 +72,7 @@ export class Obstacle extends Component implements ICollidable {
 
         let playerCar = nodeEnemy.getComponent('PlayerCar') as PlayerCar;
         if (playerCar) {
-            playerCar.Hit();
+            playerCar.Hit(PlayerHitType.Obstacle);
         }
     }
 }
