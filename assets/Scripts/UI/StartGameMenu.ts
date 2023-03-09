@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, sys } from 'cc';
 import { EventManager } from '../EventManager';
 import { GameConstants } from '../GameConstants';
 import { IWindow } from './IWindow';
@@ -19,7 +19,6 @@ export class StartGameMenu extends Component implements IWindow {
     {
         EventManager.dispatchEvent(GameConstants.START_GAME_PREVIEW);
     }
-
 }
 
 

@@ -20,20 +20,26 @@ export class InGameMenu extends Component implements IWindow {
     @property(Animation)
     rideText!: Animation;
     @property(Animation)
+    speedUpText!: Animation;
+    @property(Animation)
     timeEndedText!: Animation;
 
     
     onEnable() {
         EventManager.on(GameConstants.START_STARTUP_TEXT, this.ShowRideText, this);
+        EventManager.on(GameConstants.SPEED_UP, this.ShowSpeedUpText, this);
         EventManager.on(GameConstants.END_GAME, this.ShowTimeEndedText, this);
         this.rideText.on(Animation.EventType.STOP, this.HideRideText, this);
+        this.speedUpText.on(Animation.EventType.STOP, this.HideSpeedUpText, this);
         this.timeEndedText.on(Animation.EventType.STOP, this.HideTimeEndedText, this);
     }
 
     onDisable() {
         EventManager.off(GameConstants.START_STARTUP_TEXT,  this.ShowRideText, this);
+        EventManager.off(GameConstants.SPEED_UP, this.ShowSpeedUpText, this);
         EventManager.off(GameConstants.END_GAME, this.ShowTimeEndedText, this);
         this.rideText.off(Animation.EventType.STOP, this.HideRideText, this);
+        this.speedUpText.off(Animation.EventType.STOP, this.HideSpeedUpText, this);
         this.timeEndedText.off(Animation.EventType.STOP, this.HideTimeEndedText, this);
     }
 
@@ -57,6 +63,17 @@ export class InGameMenu extends Component implements IWindow {
     HideRideText()
     {
         this.rideText.node.active = false;
+    }
+
+    ShowSpeedUpText()
+    {
+        this.speedUpText.node.active = true;
+        this.speedUpText.play();
+    }
+
+    HideSpeedUpText()
+    {
+        this.speedUpText.node.active = false;
     }
 
     ShowTimeEndedText()
