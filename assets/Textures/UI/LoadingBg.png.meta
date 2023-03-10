@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "1bebef5d-08be-4b61-8a4d-ca6826aa74a9",
+  "uuid": "aef17d96-6f78-4f38-b599-506371223d44",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "1bebef5d-08be-4b61-8a4d-ca6826aa74a9@6c48a",
+      "uuid": "aef17d96-6f78-4f38-b599-506371223d44@6c48a",
       "displayName": "LoadingBg",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "1bebef5d-08be-4b61-8a4d-ca6826aa74a9"
+        "imageUuidOrDatabaseUri": "aef17d96-6f78-4f38-b599-506371223d44"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "1bebef5d-08be-4b61-8a4d-ca6826aa74a9@f9941",
+      "uuid": "aef17d96-6f78-4f38-b599-506371223d44@f9941",
       "displayName": "LoadingBg",
       "id": "f9941",
       "name": "spriteFrame",
@@ -45,17 +45,17 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 1920,
-        "height": 1080,
-        "rawWidth": 1920,
-        "rawHeight": 1080,
+        "width": 1024,
+        "height": 576,
+        "rawWidth": 1024,
+        "rawHeight": 576,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "1bebef5d-08be-4b61-8a4d-ca6826aa74a9@6c48a",
+        "imageUuidOrDatabaseUri": "aef17d96-6f78-4f38-b599-506371223d44@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,9 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "1bebef5d-08be-4b61-8a4d-ca6826aa74a9@f9941",
-    "compressSettings": {
-      "useCompressTexture": false
-    }
+    "redirect": "aef17d96-6f78-4f38-b599-506371223d44@f9941"
   }
 }
