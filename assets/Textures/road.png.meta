@@ -70,6 +70,9 @@
     "hasAlpha": true,
     "type": "sprite-frame",
     "redirect": "a6eaedb4-a625-42c2-bbde-abb40cccb7cf@f9941",
-    "flipVertical": false
+    "flipVertical": false,
+    "compressSettings": {
+      "useCompressTexture": false
+    }
   }
 }

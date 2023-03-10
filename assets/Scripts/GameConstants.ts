@@ -22,7 +22,7 @@ export class GameConstants
         static CAR_TURN_SPEED				    = 20;
         static CAR_TURN_ANGLE				    = 5;
 
-        static OBSTACLE_SPAWN_SAFE_DISTANCE     = 1140;
+        static OBSTACLE_SPAWN_SAFE_DISTANCE     = 1440;
         static COIN_SPAWN_SAFE_DISTANCE         = 400;
         static COIN_OFFSET_SAFE_DISTANCE        = 200;
 
@@ -34,7 +34,7 @@ export class GameConstants
 
         static SPEED_UP_MULTIPLIER              = 2;
 
-        static OBSTACLE_GENERATION_INTERVAL     = 2;
+        static OBSTACLE_GENERATION_INTERVAL     = 3;
 
         static START_GAME_PREVIEW               =  "StartGamePreview"
         static START_GAME                       =  "StartGame"

@@ -69,6 +69,9 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "04285cad-3523-442e-a759-479743d7dbf1@f9941"
+    "redirect": "04285cad-3523-442e-a759-479743d7dbf1@f9941",
+    "compressSettings": {
+      "useCompressTexture": false
+    }
   }
 }

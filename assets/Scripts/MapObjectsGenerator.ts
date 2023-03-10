@@ -70,7 +70,7 @@ export class MapObjectsGenerator extends Component {
     }
 
     StartGenerating() {
-        this.schedule(this.Generate, GameConstants.OBSTACLE_GENERATION_INTERVAL, GameConstants.GAME_DURATION/GameConstants.OBSTACLE_GENERATION_INTERVAL - 2, 0);
+        this.schedule(this.Generate, GameConstants.OBSTACLE_GENERATION_INTERVAL, GameConstants.GAME_DURATION / GameConstants.OBSTACLE_GENERATION_INTERVAL - 2, 0);
     }
 
     Generate() {

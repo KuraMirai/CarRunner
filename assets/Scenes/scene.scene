@@ -548,7 +548,7 @@
     "_priority": 1073741824,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 558.9648798521256,
+    "_orthoHeight": 620.5857740585774,
     "_near": 1,
     "_far": 2000,
     "_color": {
@@ -1144,22 +1144,10 @@
       "b": 124,
       "a": 255
     },
-    "_normalSprite": {
-      "__uuid__": "b23af1d4-712d-402d-85b6-996aeda242b6@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
-    "_hoverSprite": {
-      "__uuid__": "b23af1d4-712d-402d-85b6-996aeda242b6@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
-    "_pressedSprite": {
-      "__uuid__": "b23af1d4-712d-402d-85b6-996aeda242b6@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
-    "_disabledSprite": {
-      "__uuid__": "b23af1d4-712d-402d-85b6-996aeda242b6@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
+    "_normalSprite": null,
+    "_hoverSprite": null,
+    "_pressedSprite": null,
+    "_disabledSprite": null,
     "_duration": 0.1,
     "_zoomScale": 1.2,
     "_target": {
